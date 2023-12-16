@@ -1,13 +1,17 @@
 import { API_URL, token } from "./config"
 
-export default () => {
+export default (todo) => {
     return fetch(`${API_URL}/todos`, {
-        method: 'GET',
+        method: 'POST',
         headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": 'application/json'
         },
-        mode: 'cors'
+
+        body: JSON.stringify({
+            text: todo.text,
+            completed: false
+        })
     })
         .then(response => response.json())
 }
